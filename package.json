@@ -1,0 +1,12 @@
+{
+  "name": "cs-step0-message-maker",
+  "version": "1.0.0",
+  "description": "CS-Step0-Message-Maker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
