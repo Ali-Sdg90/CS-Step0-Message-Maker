@@ -1,14 +1,14 @@
 import React from "react";
-import Style from "./App.module.css";
-import Header from "./components/Header";
-import AddToList from "./components/AddToList";
-import RemoveFromList from "./components/RemoveFromList";
-import Footer from "./components/Footer";
-import ShowList from "./components/ShowList";
+import Style from "./assets/styles/App.module.scss";
+import Header from "./components/Header/Header";
+import AddToList from "./components/AddToList/AddToList";
+import RemoveFromList from "./components/RemoveFromList/RemoveFromList";
+import Footer from "./components/Footer/Footer";
+import ShowList from "./components/ShowList/ShowList";
 
 const App = () => {
     return (
-        <div>
+        <div className={Style.container}>
             <Header />
             <div className={Style.mainContents}>
                 <div className={Style.leftSide}>

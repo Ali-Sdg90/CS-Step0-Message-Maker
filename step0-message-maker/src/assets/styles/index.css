@@ -1,0 +1,33 @@
+@import url("../fonts/Vazirmatn/fonts.css");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222;
+    color: white;
+    font-family: sans-serif;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+
+    &-track {
+        background-color: #232733;
+    }
+
+    &-thumb {
+        background-color: #606060;
+        border-radius: 10px;
+
+        &:hover {
+            background-color: #858585;
+        }
+    }
+}
