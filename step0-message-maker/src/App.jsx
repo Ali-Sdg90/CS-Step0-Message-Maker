@@ -1,42 +1,23 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import { db } from "./config/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import React from "react";
+import Style from "./App.module.css";
+import Header from "./components/Header";
+import AddToList from "./components/AddToList";
+import RemoveFromList from "./components/RemoveFromList";
+import Footer from "./components/Footer";
+import ShowList from "./components/ShowList";
 
 const App = () => {
-    const [technicalMentors, setTechnicalMentors] = useState([]);
-
-    const technicalMentorsRef = collection(db, "Technical Mentors");
-
-    const getTechnicalMentorsInfo = async () => {
-        try {
-            const data = await getDocs(technicalMentorsRef);
-            const technicalMentorList = data.docs.map((technicalMentor) => ({
-                ...technicalMentor.data(),
-                id: technicalMentor.id,
-            }));
-            setTechnicalMentors(technicalMentorList);
-
-            // console.log(data);
-        } catch (err) {
-            console.log("ERROR", err);
-        }
-    };
-
-    useEffect(() => {
-        getTechnicalMentorsInfo();
-    }, []);
-
-    useEffect(() => {
-        console.log(technicalMentors);
-    }, [technicalMentors]);
-
     return (
         <div>
-            <h1>Aloha</h1>
-            {technicalMentors.map((technicalMentor) => (
-                <div>{technicalMentor.id}</div>
-            ))}
+            <Header />
+            <div className={Style.mainContents}>
+                <div className={Style.leftSide}>
+                    <AddToList />
+                    <RemoveFromList />
+                </div>
+                <ShowList />
+            </div>
+            <Footer />
         </div>
     );
 };
