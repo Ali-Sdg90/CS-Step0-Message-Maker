@@ -4,19 +4,19 @@
     .mainContents {
         // border: 1px solid red;
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr 2fr 1fr;
         padding: 30px 30px 20px;
         height: 82vh;
         gap: 12px;
 
         .leftSide {
             display: grid;
-            grid-template-rows: 3fr 2fr;
+            grid-template-rows: auto 1fr;
             gap: 12px;
         }
 
-        & div {
-            // border: 1px solid blue;
-        }
+        // & div {
+        //     border: 1px solid blue;
+        // }
     }
 }

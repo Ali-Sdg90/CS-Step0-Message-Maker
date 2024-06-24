@@ -11,7 +11,6 @@ const AppContext = ({ children }) => {
     const [WebInternsList, setWebInternsList] = useState([]);
 
     const sortNames = (list) => {
-        console.log(list);
         list.sort((a, b) => {
             let nameA = a.id.toLowerCase();
             let nameB = b.id.toLowerCase();
@@ -40,7 +39,7 @@ const AppContext = ({ children }) => {
                 // -------------
 
                 const csharpInternsList = await getDocs(
-                    collection(db, "CSharp Interns")
+                    collection(db, "C# Interns")
                 );
                 const csharpInternsData = csharpInternsList.docs.map((doc) => ({
                     ...doc.data(),

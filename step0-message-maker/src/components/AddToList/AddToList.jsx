@@ -1,47 +1,99 @@
 import React, { useEffect, useState } from "react";
 import Style from "./AddToList.module.scss";
+import { db } from "../../config/firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const AddToList = () => {
     const [formData, setFormData] = useState({
         nameEN: "",
         nameFA: "",
         telegramID: "",
-        course: "",
+        course: "Select",
     });
     const [formFilled, setFormFilled] = useState(false);
 
     useEffect(() => {
-        console.log("=>", formData.course);
+        console.log(formData);
+
         if (
             formData.nameEN &&
             formData.nameFA &&
             formData.telegramID &&
-            formData.course &&
+            formData.telegramID !== "@" &&
             formData.course !== "Select"
         ) {
             setFormFilled(true);
-            console.log("TRUE");
         } else {
             setFormFilled(false);
-            console.log("False");
         }
     }, [formData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         setFormData((prevState) => ({
             ...prevState,
             [name]: value,
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (formFilled) {
-            console.log("Form data submitted: ", formData);
+            // const collection = collection(db, "Technical Mentors");
+            // const CSharpInternsCollection = collection(db, "CSharp Interns");
+            // const MLInternsCollection = collection(db, "ML Interns");
+            // const WebInternsCollection = collection(db, "Web Interns");
+
+            let collectionRef = "";
+
+            switch (formData.course) {
+                case "Technical Mentor":
+                    collectionRef = collection(db, "Technical Mentors");
+                    break;
+                case "C# Intern":
+                    collectionRef = collection(db, "C# Interns");
+                    break;
+                case "ML Intern":
+                    collectionRef = collection(db, "ML Interns");
+                    break;
+                case "Web Intern":
+                    collectionRef = collection(db, "Web Interns");
+                    break;
+                default:
+                    return;
+            }
+
+            const newDocRef = doc(collectionRef, formData.nameEN);
+
+            await setDoc(newDocRef, {
+                Course: formData.course,
+                "Name in Persian": formData.nameFA,
+                "Telegram ID": formData.telegramID,
+            });
+
+            setFormData({
+                nameEN: "",
+                nameFA: "",
+                telegramID: "@",
+                course: "",
+            });
         }
     };
+
+    const idInputChangeHandler = (e) => {
+        const inputValue = e.target.value;
+        const atIndex = inputValue.indexOf("@");
+        if (atIndex !== 0) {
+            console.log("yes");
+            setFormData((prevState) => ({ ...prevState, telegramID: "@" })); // Here
+        } else {
+            console.log("no");
+        }
+    };
+
+    // collection(db, "Technical Mentors")
 
     return (
         <div className={Style.container}>
@@ -54,6 +106,7 @@ const AddToList = () => {
                             type="text"
                             id="nameEN"
                             name="nameEN"
+                            placeholder="Full Name in English"
                             value={formData.nameEN}
                             onChange={handleChange}
                             required
@@ -66,8 +119,10 @@ const AddToList = () => {
                             type="text"
                             id="nameFA"
                             name="nameFA"
+                            placeholder="Full Name in Farsi"
                             value={formData.nameFA}
                             onChange={handleChange}
+                            // dir="rtl"
                             required
                             autocomplete="off"
                         />
@@ -78,8 +133,16 @@ const AddToList = () => {
                             type="text"
                             id="telegramID"
                             name="telegramID"
+                            placeholder="@Telegram_ID"
                             value={formData.telegramID}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                                e.target.value.indexOf("@") === 0
+                                    ? handleChange(e)
+                                    : setFormData((prevState) => ({
+                                          ...prevState,
+                                          telegramID: "@",
+                                      }));
+                            }}
                             required
                             autocomplete="off"
                         />
@@ -89,6 +152,7 @@ const AddToList = () => {
                         <select
                             className={Style.selectOption}
                             name="course"
+                            value={formData.course}
                             required
                             onChange={handleChange}
                         >

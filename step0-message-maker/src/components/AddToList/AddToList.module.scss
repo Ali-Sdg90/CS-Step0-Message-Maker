@@ -3,6 +3,7 @@
     background-color: #181818;
     padding: 20px 26px;
     border-radius: 8px;
+    height: 285px;
 
     .header {
         font-size: 24px;
@@ -46,6 +47,7 @@
                 transition: background-color 0.15s;
                 color: white;
                 font-size: 16px;
+                font-family: "Vazirmatn";
 
                 &:focus {
                     background-color: rgb(88, 88, 88);
@@ -83,12 +85,12 @@
         border: 1px solid rgb(45, 45, 45);
         color: white;
         width: 140px;
-        height: 40px;
+        height: 37px;
         border-radius: 5px;
         font-size: 18px;
         margin-top: 20px;
         display: block;
-        margin: 25px auto 5px;
+        margin: 24px auto 5px;
         transition: background-color 0.2s, transform 0.2s, opacity 0.2s;
     }
 
@@ -109,4 +111,14 @@
         background-color: rgb(117, 117, 117);
         opacity: 0.4;
     }
+}
+
+select {
+    padding: 5px !important;
+    padding-right: 30px !important;
+    appearance: none;
+}
+
+option{
+    padding: 10px;
 }

@@ -3,10 +3,109 @@
     background-color: #181818;
     padding: 20px 30px;
     border-radius: 8px;
+    height: 100%;
 
     .header {
         font-size: 24px;
         margin-bottom: 6px;
         font-weight: 600;
+    }
+
+    .positionSections {
+        // border: 1px solid yellow;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr;
+        gap: 30px;
+        margin-top: 20px;
+
+        .positionSection {
+            border: 1px solid rgba(0, 145, 255, 0.395);
+            height: 140px;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            background-color: rgb(22, 22, 22);
+
+            .sectionHeader {
+                font-size: 12px;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+                align-items: center;
+                height: 25px;
+                background-color: #111;
+            }
+
+            .members {
+                width: 100%;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 4px;
+                overflow: auto;
+                height: 120px;
+                padding-bottom: 6px;
+
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
+
+                .memberRow {
+                    border: 1px solid rgba(0, 21, 255, 0.395);
+                    width: 100%;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 3px;
+                    background-color: rgb(77, 77, 77);
+                    font-family: "Vazirmatn";
+                    font-size: 12px;
+                    transition: background-color 0.15s;
+
+                    &:hover {
+                        background-color: rgb(82, 82, 82);
+                    }
+
+                    .memberName {
+                        width: 100px;
+                        direction: rtl;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        // border: 1px solid yellow;
+                        margin-right: 5px;
+                    }
+
+                    .removeBtn {
+                        // border: 1px solid rgba(121, 17, 17, 0.3);
+                        // background-color: rgba(119, 0, 0, 0.3);
+                        border: 1px solid rgba(118, 17, 121, 0.3);
+                        background-color: rgba(119, 0, 0, 0.3);
+                        border-radius: 50%;
+                        width: 16px;
+                        height: 16px;
+                        display: flex;
+                        flex-flow: row nowrap;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+                        padding-top: 1px;
+                        transition: background-color 0.15s;
+                        margin-left: 3px;
+                        font-size: 12px;
+
+                        &:hover {
+                            background-color: rgba(154, 0, 0, 0.3);
+                        }
+                        &:active {
+                            background-color: rgba(117, 0, 0, 0.3);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
