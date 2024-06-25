@@ -13,7 +13,7 @@ const AddToList = () => {
     const [formFilled, setFormFilled] = useState(false);
 
     useEffect(() => {
-        console.log(formData);
+        // console.log(formData);
 
         if (
             formData.nameEN &&
@@ -110,7 +110,7 @@ const AddToList = () => {
                             value={formData.nameEN}
                             onChange={handleChange}
                             required
-                            autocomplete="off"
+                            autoComplete="off"
                         />
                     </div>
                     <div className={Style.input}>
@@ -124,7 +124,7 @@ const AddToList = () => {
                             onChange={handleChange}
                             // dir="rtl"
                             required
-                            autocomplete="off"
+                            autoComplete="off"
                         />
                     </div>
                     <div className={Style.input}>
@@ -144,7 +144,7 @@ const AddToList = () => {
                                       }));
                             }}
                             required
-                            autocomplete="off"
+                            autoComplete="off"
                         />
                     </div>
                     <div className={Style.input}>
@@ -155,6 +155,7 @@ const AddToList = () => {
                             value={formData.course}
                             required
                             onChange={handleChange}
+                            title="Please select position."
                         >
                             <option value="Select">- Select -</option>
                             <option value="Technical Mentor">

@@ -21,89 +21,115 @@ const RemoveFromList = () => {
             <div className={Style.positionSections}>
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
-                        Technical Mentors ({technicalMentorsList.length})
+                        Technical Mentors (
+                        {technicalMentorsList.length
+                            ? technicalMentorsList.length
+                            : "?"}
+                        )
                     </div>
 
                     <div className={Style.members}>
-                        {technicalMentorsList.map((member) => (
-                            <div className={Style.memberRow}>
-                                <span
-                                    className={Style.removeBtn}
-                                    onClick={() => deleteHandler(member)}
-                                >
-                                    -
-                                </span>
-                                <span className={Style.memberName}>
-                                    {member["Name in Persian"]}
-                                </span>
-                            </div>
-                        ))}
+                        {technicalMentorsList.length ? (
+                            technicalMentorsList.map((member, index) => (
+                                <div className={Style.memberRow} key={index}>
+                                    <span
+                                        className={Style.removeBtn}
+                                        onClick={() => deleteHandler(member)}
+                                    >
+                                        -
+                                    </span>
+                                    <span className={Style.memberName}>
+                                        {member["Name in Persian"]}
+                                    </span>
+                                </div>
+                            ))
+                        ) : (
+                            <div className={Style.loading}>Loading...</div>
+                        )}
                     </div>
                 </div>
 
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
-                        C# Interns ({CSharpInternsList.length})
+                        C# Interns (
+                        {CSharpInternsList.length
+                            ? CSharpInternsList.length
+                            : "?"}
+                        )
                     </div>
 
                     <div className={Style.members}>
-                        {CSharpInternsList.map((member) => (
-                            <div className={Style.memberRow}>
-                                <span
-                                    className={Style.removeBtn}
-                                    onClick={() => deleteHandler(member)}
-                                >
-                                    -
-                                </span>
-                                <span className={Style.memberName}>
-                                    {member["Name in Persian"]}
-                                </span>
-                            </div>
-                        ))}
+                        {CSharpInternsList.length ? (
+                            CSharpInternsList.map((member, index) => (
+                                <div className={Style.memberRow} key={index}>
+                                    <span
+                                        className={Style.removeBtn}
+                                        onClick={() => deleteHandler(member)}
+                                    >
+                                        -
+                                    </span>
+                                    <span className={Style.memberName}>
+                                        {member["Name in Persian"]}
+                                    </span>
+                                </div>
+                            ))
+                        ) : (
+                            <div className={Style.loading}>Loading...</div>
+                        )}
                     </div>
                 </div>
 
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
-                        ML Interns ({MLInternsList.length})
+                        ML Interns (
+                        {MLInternsList.length ? MLInternsList.length : "?"})
                     </div>
 
                     <div className={Style.members}>
-                        {MLInternsList.map((member) => (
-                            <div className={Style.memberRow}>
-                                <span
-                                    className={Style.removeBtn}
-                                    onClick={() => deleteHandler(member)}
-                                >
-                                    -
-                                </span>
-                                <span className={Style.memberName}>
-                                    {member["Name in Persian"]}
-                                </span>
-                            </div>
-                        ))}
+                        {MLInternsList.length ? (
+                            MLInternsList.map((member, index) => (
+                                <div className={Style.memberRow} key={index}>
+                                    <span
+                                        className={Style.removeBtn}
+                                        onClick={() => deleteHandler(member)}
+                                    >
+                                        -
+                                    </span>
+                                    <span className={Style.memberName}>
+                                        {member["Name in Persian"]}
+                                    </span>
+                                </div>
+                            ))
+                        ) : (
+                            <div className={Style.loading}>Loading...</div>
+                        )}
                     </div>
                 </div>
 
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
-                        Web Interns ({WebInternsList.length})
+                        Web Interns (
+                        {WebInternsList.length ? WebInternsList.length : "?"})
                     </div>
 
                     <div className={Style.members}>
-                        {WebInternsList.map((member) => (
-                            <div className={Style.memberRow}>
-                                <span
-                                    className={Style.removeBtn}
-                                    onClick={() => deleteHandler(member)}
-                                >
-                                    -
-                                </span>
-                                <span className={Style.memberName}>
-                                    {member["Name in Persian"]}
-                                </span>
-                            </div>
-                        ))}
+                        {WebInternsList.length ? (
+                            WebInternsList.map((member, index) => (
+                                <div className={Style.memberRow} key={index}>
+                                    <span
+                                        className={Style.removeBtn}
+                                        onClick={() => deleteHandler(member)}
+                                    >
+                                        -
+                                    </span>
+                                    <span className={Style.memberName}>
+                                        {member["Name in Persian"]}
+                                    </span>
+                                </div>
+                            ))
+                        ) : (
+                            <div className={Style.loading}>Loading...</div>
+                        )}
                     </div>
                 </div>
             </div>

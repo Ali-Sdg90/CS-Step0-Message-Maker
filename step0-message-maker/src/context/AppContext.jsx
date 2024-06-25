@@ -9,6 +9,9 @@ const AppContext = ({ children }) => {
     const [CSharpInternsList, setCSharpInternsList] = useState([]);
     const [MLInternsList, setMLInternsList] = useState([]);
     const [WebInternsList, setWebInternsList] = useState([]);
+    const [errorMsg, setErrorMsg] = useState("");
+    const [isAppReadyToUse, setIsAppReadyToUse] = useState(false);
+    const [isAdminUsingApp, setIsAdminUsingApp] = useState(false);
 
     const sortNames = (list) => {
         list.sort((a, b) => {
@@ -76,11 +79,40 @@ const AppContext = ({ children }) => {
                 setWebInternsList(sortedWebInternsList);
             } catch (error) {
                 console.error("Error fetching data: ", error);
+                setErrorMsg(error.message);
             }
         };
 
-        fetchData();
+        // fetchData();
+
+        return () => fetchData();
     }, []);
+
+    useEffect(() => {
+        if (!errorMsg) {
+            if (
+                technicalMentorsList.length > 0 &&
+                CSharpInternsList.length > 0 &&
+                MLInternsList.length > 0 &&
+                WebInternsList.length > 0
+            ) {
+                setIsAppReadyToUse(true);
+            } else {
+                setIsAppReadyToUse(false);
+            }
+        }
+    }, [
+        technicalMentorsList,
+        CSharpInternsList,
+        MLInternsList,
+        WebInternsList,
+    ]);
+
+    useEffect(() => {
+        if (isAppReadyToUse) {
+            console.log("APP IS READY TO USE");
+        }
+    }, [isAppReadyToUse]);
 
     return (
         <ListContext.Provider
@@ -93,6 +125,10 @@ const AppContext = ({ children }) => {
                 setMLInternsList,
                 WebInternsList,
                 setWebInternsList,
+                errorMsg,
+                setIsAdminUsingApp,
+                isAdminUsingApp,
+                isAppReadyToUse,
             }}
         >
             {children}
