@@ -1,11 +1,26 @@
-.container h1 {
-    font-size: 36px;
-    text-shadow: 2.5px 0 rgba(98, 0, 255, 0.25), -2.5px 0 rgba(255, 0, 0, 0.25);
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: flex-end;
-    margin-top: 4px;
-    // border: 1px solid red;
-    height: 10vh;
+.container {
+    h1 {
+        font-size: 36px;
+        text-shadow: 2.5px 0 rgba(98, 0, 255, 0.25),
+            -2.5px 0 rgba(255, 0, 0, 0.25);
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: flex-end;
+        margin-top: 4px;
+        // border: 1px solid red;
+        height: 10vh;
+    }
+
+    .ICARUS {
+        color: white;
+        text-decoration: none;
+        margin: 0 8px;
+        transition: color 0.5s 0.3s;
+
+        &:hover {
+            transition: color 0.15s;
+            color: rgb(131, 135, 255);
+        }
+    }
 }

@@ -87,7 +87,7 @@ ${addMembersToList(WebInternsList)}
 
             setTimeout(() => {
                 setCopyBtnText("Copy");
-            }, 1000);
+            }, 1500);
         });
     };
 

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Style from "./AddToList.module.scss";
 import { db } from "../../config/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { ListContext } from "../../context/AppContext";
 
 const AddToList = () => {
+    const { isAdminUsingApp } = useContext(ListContext);
     const [formData, setFormData] = useState({
         nameEN: "",
         nameFA: "",
@@ -65,35 +67,28 @@ const AddToList = () => {
                     return;
             }
 
-            const newDocRef = doc(collectionRef, formData.nameEN);
+            if (isAdminUsingApp) {
+                const newDocRef = doc(collectionRef, formData.nameEN);
 
-            await setDoc(newDocRef, {
-                Course: formData.course,
-                "Name in Persian": formData.nameFA,
-                "Telegram ID": formData.telegramID,
-            });
+                await setDoc(newDocRef, {
+                    Course: formData.course,
+                    "Name in Persian": formData.nameFA,
+                    "Telegram ID": formData.telegramID,
+                });
+
+                console.log("Online Mode: Add Member");
+            } else {
+                console.log("Local Mode: Add Member");
+            }
 
             setFormData({
                 nameEN: "",
                 nameFA: "",
                 telegramID: "@",
-                course: "",
+                course: "Select",
             });
         }
     };
-
-    const idInputChangeHandler = (e) => {
-        const inputValue = e.target.value;
-        const atIndex = inputValue.indexOf("@");
-        if (atIndex !== 0) {
-            console.log("yes");
-            setFormData((prevState) => ({ ...prevState, telegramID: "@" })); // Here
-        } else {
-            console.log("no");
-        }
-    };
-
-    // collection(db, "Technical Mentors")
 
     return (
         <div className={Style.container}>

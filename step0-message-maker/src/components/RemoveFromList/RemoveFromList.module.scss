@@ -1,5 +1,5 @@
 .container {
-    border: 1px solid rgba(55, 0, 255, 0.395);
+    border: 1px solid rgba(55, 0, 255, 0.4);
     background-color: #181818;
     padding: 20px 30px;
     border-radius: 8px;
@@ -20,7 +20,7 @@
         margin-top: 20px;
 
         .positionSection {
-            border: 1px solid rgba(0, 145, 255, 0.395);
+            border: 1px solid rgba(0, 145, 255, 0.4);
             height: 140px;
             border-radius: 6px;
             position: relative;
@@ -52,12 +52,12 @@
                     width: 0;
                 }
 
-                .loading{
+                .loading {
                     margin-top: 10px;
                 }
 
                 .memberRow {
-                    border: 1px solid rgba(0, 21, 255, 0.395);
+                    border: 1px solid rgba(0, 21, 255, 0.4);
                     width: 100%;
                     display: flex;
                     flex-flow: row nowrap;

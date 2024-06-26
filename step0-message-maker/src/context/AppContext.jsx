@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { db } from "../config/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 
 export const ListContext = createContext(null);
 
@@ -26,66 +26,78 @@ const AppContext = ({ children }) => {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const technicalMentorsList = await getDocs(
-                    collection(db, "Technical Mentors")
-                );
-                const technicalMentorsData = technicalMentorsList.docs.map(
-                    (doc) => ({ ...doc.data(), id: doc.id })
-                );
+        const fetchData = () => {
+            const unsubscribeMentors = onSnapshot(
+                collection(db, "Technical Mentors"),
+                (snapshot) => {
+                    const technicalMentorsData = snapshot.docs.map((doc) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                    }));
+                    setTechnicalMentorsList(sortNames(technicalMentorsData));
+                },
+                (error) => {
+                    console.error("Error fetching data: ", error);
+                    setErrorMsg(error.message);
+                }
+            );
 
-                const sortedTechnicalMentorsList =
-                    sortNames(technicalMentorsData);
-                setTechnicalMentorsList(sortedTechnicalMentorsList);
+            const unsubscribeCSharp = onSnapshot(
+                collection(db, "C# Interns"),
+                (snapshot) => {
+                    const csharpInternsData = snapshot.docs.map((doc) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                    }));
+                    setCSharpInternsList(sortNames(csharpInternsData));
+                },
+                (error) => {
+                    console.error("Error fetching data: ", error);
+                    setErrorMsg(error.message);
+                }
+            );
 
-                // -------------
+            const unsubscribeML = onSnapshot(
+                collection(db, "ML Interns"),
+                (snapshot) => {
+                    const mlInternsData = snapshot.docs.map((doc) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                    }));
+                    setMLInternsList(sortNames(mlInternsData));
+                },
+                (error) => {
+                    console.error("Error fetching data: ", error);
+                    setErrorMsg(error.message);
+                }
+            );
 
-                const csharpInternsList = await getDocs(
-                    collection(db, "C# Interns")
-                );
-                const csharpInternsData = csharpInternsList.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }));
+            const unsubscribeWeb = onSnapshot(
+                collection(db, "Web Interns"),
+                (snapshot) => {
+                    const webInternsData = snapshot.docs.map((doc) => ({
+                        ...doc.data(),
+                        id: doc.id,
+                    }));
+                    setWebInternsList(sortNames(webInternsData));
+                },
+                (error) => {
+                    console.error("Error fetching data: ", error);
+                    setErrorMsg(error.message);
+                }
+            );
 
-                const sortedCsharpInternsList = sortNames(csharpInternsData);
-                setCSharpInternsList(sortedCsharpInternsList);
-
-                // -------------
-
-                const mlInternsList = await getDocs(
-                    collection(db, "ML Interns")
-                );
-                const mlInternsData = mlInternsList.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }));
-
-                const sortedMlInternsList = sortNames(mlInternsData);
-                setMLInternsList(sortedMlInternsList);
-
-                // -------------
-
-                const webInternsList = await getDocs(
-                    collection(db, "Web Interns")
-                );
-                const webInternsData = webInternsList.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id,
-                }));
-
-                const sortedWebInternsList = sortNames(webInternsData);
-                setWebInternsList(sortedWebInternsList);
-            } catch (error) {
-                console.error("Error fetching data: ", error);
-                setErrorMsg(error.message);
-            }
+            return () => {
+                unsubscribeMentors();
+                unsubscribeCSharp();
+                unsubscribeML();
+                unsubscribeWeb();
+            };
         };
 
-        // fetchData();
+        const unsubscribe = fetchData();
 
-        return () => fetchData();
+        return () => unsubscribe;
     }, []);
 
     useEffect(() => {
