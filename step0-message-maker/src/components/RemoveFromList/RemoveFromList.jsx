@@ -17,19 +17,49 @@ const RemoveFromList = () => {
         CSharpInternsList,
         MLInternsList,
         WebInternsList,
+        setTechnicalMentorsList,
+        setCSharpInternsList,
+        setMLInternsList,
+        setWebInternsList,
         isAdminUsingApp,
     } = useContext(ListContext);
 
-    const deleteHandler = (memberID, sectionNumber) => {
-        console.log("DELETE", sectionsHeader[sectionNumber], memberID);
-
+    const deleteHandler = ({ id, Course }, sectionNumber) => {
         if (isAdminUsingApp) {
-            const memberDoc = doc(db, sectionsHeader[sectionNumber], memberID);
+            const memberDoc = doc(db, sectionsHeader[sectionNumber], id);
             deleteDoc(memberDoc);
 
-            console.log("Online Mode: Remove Member");
+            console.log(`Online Mode: Remove Member "${id}"`);
         } else {
-            console.log("Local Mode: Remove Member");
+            console.log(`Local Mode: Remove Member "${id}"`);
+        }
+
+        console.log(Course);
+
+        switch (Course) {
+            case "Technical Mentor":
+                setTechnicalMentorsList((prevState) =>
+                    prevState.filter((member) => member.id !== id)
+                );
+                break;
+            case "C# Intern":
+                setCSharpInternsList((prevState) =>
+                    prevState.filter((member) => member.id !== id)
+                );
+                break;
+            case "ML Intern":
+                setMLInternsList((prevState) =>
+                    prevState.filter((member) => member.id !== id)
+                );
+                break;
+            case "Web Intern":
+                setWebInternsList((prevState) =>
+                    prevState.filter((member) => member.id !== id)
+                );
+                break;
+
+            default:
+                return;
         }
     };
 
@@ -41,21 +71,19 @@ const RemoveFromList = () => {
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
                         {sectionsHeader[0]} (
-                        {technicalMentorsList.length
+                        {technicalMentorsList[0] !== "initial load"
                             ? technicalMentorsList.length
                             : "?"}
                         )
                     </div>
 
                     <div className={Style.members}>
-                        {technicalMentorsList.length ? (
+                        {technicalMentorsList[0] !== "initial load" ? (
                             technicalMentorsList.map((member, index) => (
                                 <div className={Style.memberRow} key={index}>
                                     <span
                                         className={Style.removeBtn}
-                                        onClick={() =>
-                                            deleteHandler(member.id, 0)
-                                        }
+                                        onClick={() => deleteHandler(member, 0)}
                                     >
                                         -
                                     </span>
@@ -73,21 +101,19 @@ const RemoveFromList = () => {
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
                         {sectionsHeader[1]} (
-                        {CSharpInternsList.length
+                        {CSharpInternsList[0] !== "initial load"
                             ? CSharpInternsList.length
                             : "?"}
                         )
                     </div>
 
                     <div className={Style.members}>
-                        {CSharpInternsList.length ? (
+                        {CSharpInternsList[0] !== "initial load" ? (
                             CSharpInternsList.map((member, index) => (
                                 <div className={Style.memberRow} key={index}>
                                     <span
                                         className={Style.removeBtn}
-                                        onClick={() =>
-                                            deleteHandler(member.id, 1)
-                                        }
+                                        onClick={() => deleteHandler(member, 1)}
                                     >
                                         -
                                     </span>
@@ -105,18 +131,19 @@ const RemoveFromList = () => {
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
                         {sectionsHeader[2]} (
-                        {MLInternsList.length ? MLInternsList.length : "?"})
+                        {MLInternsList[0] !== "initial load"
+                            ? MLInternsList.length
+                            : "?"}
+                        )
                     </div>
 
                     <div className={Style.members}>
-                        {MLInternsList.length ? (
+                        {MLInternsList[0] !== "initial load" ? (
                             MLInternsList.map((member, index) => (
                                 <div className={Style.memberRow} key={index}>
                                     <span
                                         className={Style.removeBtn}
-                                        onClick={() =>
-                                            deleteHandler(member.id, 2)
-                                        }
+                                        onClick={() => deleteHandler(member, 2)}
                                     >
                                         -
                                     </span>
@@ -133,19 +160,20 @@ const RemoveFromList = () => {
 
                 <div className={Style.positionSection}>
                     <div className={Style.sectionHeader}>
-                        {sectionsHeader[2]} (
-                        {WebInternsList.length ? WebInternsList.length : "?"})
+                        {sectionsHeader[3]} (
+                        {WebInternsList[0] !== "initial load"
+                            ? WebInternsList.length
+                            : "?"}
+                        )
                     </div>
 
                     <div className={Style.members}>
-                        {WebInternsList.length ? (
+                        {WebInternsList[0] !== "initial load" ? (
                             WebInternsList.map((member, index) => (
                                 <div className={Style.memberRow} key={index}>
                                     <span
                                         className={Style.removeBtn}
-                                        onClick={() =>
-                                            deleteHandler(member.id, 3)
-                                        }
+                                        onClick={() => deleteHandler(member, 3)}
                                     >
                                         -
                                     </span>

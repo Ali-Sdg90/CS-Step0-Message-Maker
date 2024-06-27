@@ -1,17 +1,21 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 import { db } from "../config/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export const ListContext = createContext(null);
 
 const AppContext = ({ children }) => {
-    const [technicalMentorsList, setTechnicalMentorsList] = useState([]);
-    const [CSharpInternsList, setCSharpInternsList] = useState([]);
-    const [MLInternsList, setMLInternsList] = useState([]);
-    const [WebInternsList, setWebInternsList] = useState([]);
+    const [technicalMentorsList, setTechnicalMentorsList] = useState([
+        "initial load",
+    ]);
+    const [CSharpInternsList, setCSharpInternsList] = useState([
+        "initial load",
+    ]);
+    const [MLInternsList, setMLInternsList] = useState(["initial load"]);
+    const [WebInternsList, setWebInternsList] = useState(["initial load"]);
     const [errorMsg, setErrorMsg] = useState("");
     const [isAppReadyToUse, setIsAppReadyToUse] = useState(false);
-    const [isAdminUsingApp, setIsAdminUsingApp] = useState(false);
+    const [isAdminUsingApp, setIsAdminUsingApp] = useState(false); // TODO: false
 
     const sortNames = (list) => {
         list.sort((a, b) => {
@@ -21,84 +25,83 @@ const AppContext = ({ children }) => {
             if (nameA > nameB) return 1;
             return 0;
         });
-
+        console.log(list);
         return list;
     };
 
+    const sortedTechnicalMentorsList = useMemo(
+        () => sortNames([...technicalMentorsList]),
+        [technicalMentorsList]
+    );
+    const sortedCSharpInternsList = useMemo(
+        () => sortNames([...CSharpInternsList]),
+        [CSharpInternsList]
+    );
+    const sortedMLInternsList = useMemo(
+        () => sortNames([...MLInternsList]),
+        [MLInternsList]
+    );
+    const sortedWebInternsList = useMemo(
+        () => sortNames([...WebInternsList]),
+        [WebInternsList]
+    );
+
+    const fetchData = async () => {
+        try {
+            const technicalMentorsList = await getDocs(
+                collection(db, "Technical Mentors")
+            );
+
+            const technicalMentorsData = technicalMentorsList.docs.map(
+                (doc) => ({ ...doc.data(), id: doc.id })
+            );
+
+            setTechnicalMentorsList(technicalMentorsData);
+
+            // -------------
+
+            const csharpInternsList = await getDocs(
+                collection(db, "C# Interns")
+            );
+            const csharpInternsData = csharpInternsList.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+
+            setCSharpInternsList(csharpInternsData);
+
+            // -------------
+
+            const mlInternsList = await getDocs(collection(db, "ML Interns"));
+            const mlInternsData = mlInternsList.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+
+            setMLInternsList(mlInternsData);
+
+            // -------------
+
+            const webInternsList = await getDocs(collection(db, "Web Interns"));
+            const webInternsData = webInternsList.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id,
+            }));
+
+            setWebInternsList(webInternsData);
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+            setErrorMsg(error.message);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = () => {
-            const unsubscribeMentors = onSnapshot(
-                collection(db, "Technical Mentors"),
-                (snapshot) => {
-                    const technicalMentorsData = snapshot.docs.map((doc) => ({
-                        ...doc.data(),
-                        id: doc.id,
-                    }));
-                    setTechnicalMentorsList(sortNames(technicalMentorsData));
-                },
-                (error) => {
-                    console.error("Error fetching data: ", error);
-                    setErrorMsg(error.message);
-                }
-            );
-
-            const unsubscribeCSharp = onSnapshot(
-                collection(db, "C# Interns"),
-                (snapshot) => {
-                    const csharpInternsData = snapshot.docs.map((doc) => ({
-                        ...doc.data(),
-                        id: doc.id,
-                    }));
-                    setCSharpInternsList(sortNames(csharpInternsData));
-                },
-                (error) => {
-                    console.error("Error fetching data: ", error);
-                    setErrorMsg(error.message);
-                }
-            );
-
-            const unsubscribeML = onSnapshot(
-                collection(db, "ML Interns"),
-                (snapshot) => {
-                    const mlInternsData = snapshot.docs.map((doc) => ({
-                        ...doc.data(),
-                        id: doc.id,
-                    }));
-                    setMLInternsList(sortNames(mlInternsData));
-                },
-                (error) => {
-                    console.error("Error fetching data: ", error);
-                    setErrorMsg(error.message);
-                }
-            );
-
-            const unsubscribeWeb = onSnapshot(
-                collection(db, "Web Interns"),
-                (snapshot) => {
-                    const webInternsData = snapshot.docs.map((doc) => ({
-                        ...doc.data(),
-                        id: doc.id,
-                    }));
-                    setWebInternsList(sortNames(webInternsData));
-                },
-                (error) => {
-                    console.error("Error fetching data: ", error);
-                    setErrorMsg(error.message);
-                }
-            );
-
-            return () => {
-                unsubscribeMentors();
-                unsubscribeCSharp();
-                unsubscribeML();
-                unsubscribeWeb();
-            };
-        };
-
-        const unsubscribe = fetchData();
-
-        return () => unsubscribe;
+        return () => fetchData();
     }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [isAdminUsingApp]);
 
     useEffect(() => {
         if (!errorMsg) {
@@ -113,11 +116,14 @@ const AppContext = ({ children }) => {
                 setIsAppReadyToUse(false);
             }
         }
+
+        // console.log("technicalMentorsList", technicalMentorsList);
     }, [
         technicalMentorsList,
         CSharpInternsList,
         MLInternsList,
         WebInternsList,
+        errorMsg,
     ]);
 
     useEffect(() => {
@@ -129,13 +135,13 @@ const AppContext = ({ children }) => {
     return (
         <ListContext.Provider
             value={{
-                technicalMentorsList,
+                technicalMentorsList: sortedTechnicalMentorsList,
                 setTechnicalMentorsList,
-                CSharpInternsList,
+                CSharpInternsList: sortedCSharpInternsList,
                 setCSharpInternsList,
-                MLInternsList,
+                MLInternsList: sortedMLInternsList,
                 setMLInternsList,
-                WebInternsList,
+                WebInternsList: sortedWebInternsList,
                 setWebInternsList,
                 errorMsg,
                 setIsAdminUsingApp,

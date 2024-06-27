@@ -5,18 +5,24 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { ListContext } from "../../context/AppContext";
 
 const AddToList = () => {
-    const { isAdminUsingApp } = useContext(ListContext);
+    const {
+        setTechnicalMentorsList,
+        setCSharpInternsList,
+        setMLInternsList,
+        setWebInternsList,
+        isAdminUsingApp,
+    } = useContext(ListContext);
+
     const [formData, setFormData] = useState({
         nameEN: "",
         nameFA: "",
         telegramID: "",
         course: "Select",
     });
+
     const [formFilled, setFormFilled] = useState(false);
 
     useEffect(() => {
-        // console.log(formData);
-
         if (
             formData.nameEN &&
             formData.nameFA &&
@@ -43,11 +49,6 @@ const AddToList = () => {
         e.preventDefault();
 
         if (formFilled) {
-            // const collection = collection(db, "Technical Mentors");
-            // const CSharpInternsCollection = collection(db, "CSharp Interns");
-            // const MLInternsCollection = collection(db, "ML Interns");
-            // const WebInternsCollection = collection(db, "Web Interns");
-
             let collectionRef = "";
 
             switch (formData.course) {
@@ -84,9 +85,64 @@ const AddToList = () => {
             setFormData({
                 nameEN: "",
                 nameFA: "",
-                telegramID: "@",
+                telegramID: "",
                 course: "Select",
             });
+
+            const addNewMemberToListFunc = (prevState) => {
+                return [
+                    ...prevState,
+                    {
+                        Course: formData.course,
+                        "Name in Persian": formData.nameFA,
+                        "Telegram ID": formData.telegramID,
+                        id: formData.nameEN,
+                    },
+                ];
+            };
+
+            switch (formData.course) {
+                case "Technical Mentor":
+                    setTechnicalMentorsList((prevState) =>
+                        addNewMemberToListFunc(prevState)
+                    );
+                    break;
+                case "C# Intern":
+                    setCSharpInternsList((prevState) =>
+                        addNewMemberToListFunc(prevState)
+                    );
+                    break;
+                case "ML Intern":
+                    setMLInternsList((prevState) =>
+                        addNewMemberToListFunc(prevState)
+                    );
+                    break;
+                case "Web Intern":
+                    setWebInternsList((prevState) =>
+                        addNewMemberToListFunc(prevState)
+                    );
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const telegramIDHandler = (e) => {
+        if (e.target.value.indexOf("@") === 0) {
+            if (e.target.value[1] === "@") {
+                setFormData((prevState) => ({
+                    ...prevState,
+                    telegramID: e.target.value.substring(1),
+                }));
+            } else {
+                handleChange(e);
+            }
+        } else {
+            setFormData((prevState) => ({
+                ...prevState,
+                telegramID: `@${e.target.value}`,
+            }));
         }
     };
 
@@ -130,17 +186,11 @@ const AddToList = () => {
                             name="telegramID"
                             placeholder="@Telegram_ID"
                             value={formData.telegramID}
-                            onChange={(e) => {
-                                e.target.value.indexOf("@") === 0
-                                    ? handleChange(e)
-                                    : setFormData((prevState) => ({
-                                          ...prevState,
-                                          telegramID: "@",
-                                      }));
-                            }}
+                            onChange={telegramIDHandler}
                             required
                             autoComplete="off"
                         />
+                        {/* <span className={Style.idPrefix}>@</span> */}
                     </div>
                     <div className={Style.input}>
                         <label htmlFor="course">Position:</label>

@@ -106,7 +106,11 @@ const LoginSection = () => {
                 uploaded to the database.
             </div>
 
-            <div className={Style.connectionState}>
+            <div
+                className={`${Style.connectionState} ${
+                    isAdminUsingApp && Style.adminEnters
+                }`}
+            >
                 {isAdminUsingApp
                     ? "You are connected to the database"
                     : "You are not connected to the database"}
