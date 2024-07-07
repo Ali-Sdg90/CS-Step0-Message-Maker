@@ -1,17 +1,6 @@
 .container {
     /* border: 1px solid red; */
 
-    .DefaultProperties {
-        width: 100%;
-        background-color: rgb(27, 29, 31);
-        transform-origin: top;
-    }
-
-    .CustomScaleCalc {
-        position: relative;
-        width: 1000px !important;
-    }
-
     .mainContents {
         // border: 1px solid red;
         display: grid;
@@ -20,6 +9,8 @@
         // height: 82vh;
         // height: 570px;
         gap: 12px;
+        margin: auto;
+        max-width: 1600px;
 
         .leftSide {
             display: grid;
