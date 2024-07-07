@@ -1,0 +1,124 @@
+.container {
+  border: 1px solid rgba(55, 0, 255, 0.4);
+  background-color: #181818;
+  padding: 20px 26px;
+  border-radius: 8px;
+  height: 285px;
+}
+.container .header {
+  font-size: 24px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.container .inputs {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+  margin-top: 16px;
+}
+.container .inputs .input {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 8px;
+  position: relative;
+}
+.container .inputs .input label {
+  white-space: nowrap;
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+.container .inputs .input input {
+  width: 100%;
+  height: 30px;
+  border-radius: 4px;
+  padding: 3px 8px;
+  background-color: rgb(77, 77, 77);
+  outline: none;
+  border: none;
+  transition: background-color 0.15s;
+  color: white;
+  font-size: 16px;
+  font-family: "Vazirmatn";
+}
+.container .inputs .input input::-moz-placeholder {
+  position: relative;
+  top: 1px;
+}
+.container .inputs .input input::placeholder {
+  position: relative;
+  top: 1px;
+}
+.container .inputs .input input:focus {
+  background-color: rgb(88, 88, 88);
+}
+.container .inputs .input input:hover {
+  background-color: rgb(93, 93, 93);
+}
+.container .inputs .input .selectOption {
+  color: white;
+  width: 100%;
+  height: 30px;
+  border-radius: 4px;
+  background-color: rgb(76, 76, 76);
+  border: none;
+  outline: none;
+  font-size: 16px;
+  transition: background-color 0.15s;
+  padding: 0 8px !important;
+}
+.container .inputs .input .selectOption:focus {
+  background-color: rgb(88, 88, 88);
+}
+.container .inputs .input .selectOption:hover {
+  background-color: rgb(88, 88, 88);
+}
+.container .submit {
+  background-color: rgb(69, 69, 69);
+  border: 1px solid rgb(45, 45, 45);
+  color: white;
+  width: 140px;
+  height: 37px;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-top: 20px;
+  display: block;
+  margin: 24px auto 5px;
+  transition: background-color 0.2s, transform 0.2s, opacity 0.2s;
+}
+.container .active {
+  cursor: pointer;
+}
+.container .active:hover {
+  background-color: rgb(77, 77, 77);
+}
+.container .active:active {
+  background-color: rgb(63, 63, 63);
+  transform: translateY(1px);
+}
+.container .disable {
+  background-color: rgb(117, 117, 117);
+  opacity: 0.4;
+}
+
+select {
+  padding: 5px !important;
+  padding-right: 30px !important;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+option {
+  padding: 10px;
+}/*# sourceMappingURL=AddToList.module.css.map */

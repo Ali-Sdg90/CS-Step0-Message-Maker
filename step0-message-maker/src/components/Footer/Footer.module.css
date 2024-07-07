@@ -1,0 +1,11 @@
+.container {
+  background-color: #111;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 56px;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+}/*# sourceMappingURL=Footer.module.css.map */

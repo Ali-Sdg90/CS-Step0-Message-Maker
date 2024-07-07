@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Style from "./RemoveFromList.module.scss";
-import { ListContext } from "../../context/AppContext";
+import { ListContext } from "../../store/AppContext";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 

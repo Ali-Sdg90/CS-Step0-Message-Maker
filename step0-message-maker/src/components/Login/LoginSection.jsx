@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Style from "./LoginSection.module.scss";
 import CryptoJS from "crypto-js";
-import { ListContext } from "../../context/AppContext";
+import { ListContext } from "../../store/AppContext";
 
 const LoginSection = () => {
     const { setIsAdminUsingApp, isAdminUsingApp } = useContext(ListContext);
@@ -99,11 +99,13 @@ const LoginSection = () => {
                 </form>
             </div>
 
-            <div className={Style.loginExplanation}>
-                To modify the database, you must log in with an Admin account.
-                Without an Admin login, you can still use the app and make
-                changes, but these changes will only be local and will not be
-                uploaded to the database.
+            <div className={Style.loginExplanationContainer}>
+                <div className={Style.loginExplanationText}>
+                    To modify the database, you must log in with an Admin
+                    account. Without an Admin login, you can still use the app
+                    and make changes, but these changes will only be local and
+                    will not be uploaded to the database.
+                </div>
             </div>
 
             <div

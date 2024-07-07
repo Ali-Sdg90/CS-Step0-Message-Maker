@@ -1,12 +1,24 @@
 .container {
     /* border: 1px solid red; */
 
+    .DefaultProperties {
+        width: 100%;
+        background-color: rgb(27, 29, 31);
+        transform-origin: top;
+    }
+
+    .CustomScaleCalc {
+        position: relative;
+        width: 1000px !important;
+    }
+
     .mainContents {
         // border: 1px solid red;
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;
         padding: 30px 30px 20px;
-        height: 82vh;
+        // height: 82vh;
+        // height: 570px;
         gap: 12px;
 
         .leftSide {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Style from "./ShowList.module.scss";
 import { renderToStaticMarkup } from "react-dom/server";
 import { demoList } from "./demoList";
-import { ListContext } from "../../context/AppContext.jsx";
+import { ListContext } from "../../store/AppContext.jsx";
 
 const numbersFA = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 

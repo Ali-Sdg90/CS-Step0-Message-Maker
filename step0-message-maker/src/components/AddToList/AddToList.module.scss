@@ -9,6 +9,9 @@
         font-size: 24px;
         margin-bottom: 6px;
         font-weight: 600;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .inputs {
@@ -49,6 +52,11 @@
                 color: white;
                 font-size: 16px;
                 font-family: "Vazirmatn";
+
+                &::placeholder {
+                    position: relative;
+                    top: 1px;
+                }
 
                 &:focus {
                     background-color: rgb(88, 88, 88);

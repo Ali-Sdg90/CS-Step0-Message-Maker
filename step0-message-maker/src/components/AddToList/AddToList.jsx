@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Style from "./AddToList.module.scss";
 import { db } from "../../config/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { ListContext } from "../../context/AppContext";
+import { ListContext } from "../../store/AppContext";
 
 const AddToList = () => {
     const {

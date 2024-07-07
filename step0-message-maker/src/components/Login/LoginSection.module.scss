@@ -9,6 +9,9 @@
         font-size: 24px;
         margin-bottom: 6px;
         font-weight: 600;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .submitForm {
@@ -33,6 +36,11 @@
             font-family: "Vazirmatn";
             display: block;
             margin: 4px 0 16px;
+
+            &::placeholder {
+                position: relative;
+                top: 1px;
+            }
 
             &:focus {
                 background-color: rgb(88, 88, 88);
@@ -76,7 +84,7 @@
         }
     }
 
-    .loginExplanation {
+    .loginExplanationContainer {
         font-size: 15px;
         text-align: justify;
         margin-top: 23px;
@@ -94,6 +102,11 @@
             margin-top: -8px;
             margin: -8px 0 16px;
         }
+
+        .loginExplanationText {
+            height: 110px;
+            overflow: auto;
+        }
     }
 
     .connectionState {
@@ -104,7 +117,7 @@
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
-        margin-top: 30px;
+        margin-top: 20px;
         transition: background-color 0.4s 1s, text-shadow 0.4s 1s;
 
         &:hover {
