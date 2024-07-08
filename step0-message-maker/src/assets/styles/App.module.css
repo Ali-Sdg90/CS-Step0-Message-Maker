@@ -6,6 +6,8 @@
   grid-template-columns: 1fr 2fr 1fr;
   padding: 30px 30px 20px;
   gap: 12px;
+  margin: auto;
+  max-width: 1600px;
 }
 .container .mainContents .leftSide {
   display: grid;

@@ -16,6 +16,10 @@ const AppContext = ({ children }) => {
     const [errorMsg, setErrorMsg] = useState("");
     const [isAppReadyToUse, setIsAppReadyToUse] = useState(false);
     const [isAdminUsingApp, setIsAdminUsingApp] = useState(false); // TODO: false
+    const [toastifyObj, setToastifyObj] = useState({
+        title: "You are using app in Local Mode",
+        mode: "info",
+    });
 
     const sortNames = (list) => {
         list.sort((a, b) => {
@@ -90,8 +94,9 @@ const AppContext = ({ children }) => {
 
             setWebInternsList(webInternsData);
         } catch (error) {
-            console.error("Error fetching data: ", error);
-            setErrorMsg(error.message);
+            // console.clear();
+            // console.error("Error fetching data: ", error);
+            setErrorMsg(":::::", error.message);
         }
     };
 
@@ -144,9 +149,12 @@ const AppContext = ({ children }) => {
                 WebInternsList: sortedWebInternsList,
                 setWebInternsList,
                 errorMsg,
-                setIsAdminUsingApp,
+                setErrorMsg,
                 isAdminUsingApp,
+                setIsAdminUsingApp,
                 isAppReadyToUse,
+                setToastifyObj,
+                toastifyObj,
             }}
         >
             {children}

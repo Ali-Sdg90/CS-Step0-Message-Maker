@@ -6,11 +6,13 @@ import RemoveFromList from "./components/RemoveFromList/RemoveFromList";
 import Footer from "./components/Footer/Footer";
 import ShowList from "./components/ShowList/ShowList";
 import LoginSection from "./components/Login/LoginSection";
-import CustomScaleCalc from "./helpers/CustomScaleCalc";
+import CustomScaleCalc from "./helpers/CustomScaleCalc/CustomScaleCalc";
+import Tostify from "./helpers/Tostify/Tostify";
 
 const App = () => {
     return (
         <div className={Style.container}>
+            <Tostify />
             <CustomScaleCalc>
                 <Header />
                 <div className={Style.mainContents}>

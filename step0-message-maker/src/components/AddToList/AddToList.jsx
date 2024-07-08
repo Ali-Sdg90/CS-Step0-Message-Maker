@@ -22,6 +22,8 @@ const AddToList = () => {
 
     const [formFilled, setFormFilled] = useState(false);
 
+    const [isBtnShacking, setIsBtnShacking] = useState(false);
+
     useEffect(() => {
         if (
             formData.nameEN &&
@@ -35,6 +37,15 @@ const AddToList = () => {
             setFormFilled(false);
         }
     }, [formData]);
+
+    useEffect(() => {
+        if (isBtnShacking) {
+            const timer = setTimeout(() => {
+                setIsBtnShacking(false);
+            }, 400);
+            return () => clearTimeout(timer);
+        }
+    }, [isBtnShacking]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -212,10 +223,16 @@ const AddToList = () => {
                         </select>
                     </div>
                 </div>
+
                 <button
                     className={`${Style.submit} ${
                         formFilled ? Style.active : Style.disable
-                    }`}
+                    } ${isBtnShacking ? Style.shakeBtn : ""}`}
+                    onClick={() => {
+                        if (!formFilled) {
+                            setIsBtnShacking(true);
+                        }
+                    }}
                     type="submit"
                 >
                     Submit

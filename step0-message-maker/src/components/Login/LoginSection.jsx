@@ -11,6 +11,8 @@ const LoginSection = () => {
         password: "",
     });
 
+    const [isBtnShacking, setIsBtnShacking] = useState(false);
+
     const inputChangeHandler = (e) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
@@ -55,6 +57,15 @@ const LoginSection = () => {
         }
     };
 
+    useEffect(() => {
+        if (isBtnShacking) {
+            const timer = setTimeout(() => {
+                setIsBtnShacking(false);
+            }, 400);
+            return () => clearTimeout(timer);
+        }
+    }, [isBtnShacking]);
+
     return (
         <div className={Style.container}>
             <div className={Style.header}>
@@ -92,7 +103,12 @@ const LoginSection = () => {
                             formData.username && formData.password
                                 ? Style.active
                                 : Style.disable
-                        }`}
+                        } ${isBtnShacking ? Style.shakeBtn : ""}`}
+                        onClick={() => {
+                            if (!isAdminUsingApp) {
+                                setIsBtnShacking(true);
+                            }
+                        }}
                     >
                         Submit
                     </button>

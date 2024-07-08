@@ -121,6 +121,10 @@
         background-color: rgb(117, 117, 117);
         opacity: 0.4;
     }
+
+    .shakeBtn {
+        animation: shake 0.3s;
+    }
 }
 
 select {
@@ -131,4 +135,22 @@ select {
 
 option {
     padding: 10px;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+    75% {
+        transform: translateX(-2px);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }

@@ -130,4 +130,25 @@
   transition: background-color 0.15s, text-shadow 0.15s;
   background-color: rgb(0, 96, 0);
   text-shadow: 0 0 1.5px white;
+}
+.container .shakeBtn {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }/*# sourceMappingURL=LoginSection.module.css.map */
