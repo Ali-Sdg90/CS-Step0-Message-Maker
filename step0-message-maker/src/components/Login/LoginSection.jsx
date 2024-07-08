@@ -13,6 +13,8 @@ const LoginSection = () => {
 
     const [isBtnShacking, setIsBtnShacking] = useState(false);
 
+    const { setToastifyObj } = useContext(ListContext);
+
     const inputChangeHandler = (e) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
@@ -51,9 +53,26 @@ const LoginSection = () => {
                 username: "",
                 password: "",
             });
+
+            setToastifyObj({
+                title: "Aloha Admin :)",
+                mode: "info",
+            });
+
+            setTimeout(() => {
+                setToastifyObj({
+                    title: "You are connected to database",
+                    mode: "success",
+                });
+            }, 300);
         } else {
-            console.log("You are not the Admin :)");
+            console.log("You are NOT the Admin :)");
             setIsAdminUsingApp(false);
+
+            setToastifyObj({
+                title: "You are NOT the Admin :)",
+                mode: "error",
+            });
         }
     };
 

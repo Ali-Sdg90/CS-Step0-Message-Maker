@@ -22,6 +22,7 @@ const RemoveFromList = () => {
         setMLInternsList,
         setWebInternsList,
         isAdminUsingApp,
+        setToastifyObj,
     } = useContext(ListContext);
 
     const deleteHandler = ({ id, Course }, sectionNumber) => {
@@ -30,8 +31,18 @@ const RemoveFromList = () => {
             deleteDoc(memberDoc);
 
             console.log(`Online Mode: Remove Member "${id}"`);
+
+            setToastifyObj({
+                title: `Online Mode: Remove "${id}"`,
+                mode: "warning",
+            });
         } else {
             console.log(`Local Mode: Remove Member "${id}"`);
+
+            setToastifyObj({
+                title: `Local Mode: Remove "${id}"`,
+                mode: "info",
+            });
         }
 
         console.log(Course);

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import Style from "./ShowList.module.scss";
-import { renderToStaticMarkup } from "react-dom/server";
 import { demoList } from "./demoList";
 import { ListContext } from "../../store/AppContext.jsx";
 
@@ -42,6 +41,7 @@ const ShowList = () => {
         CSharpInternsList,
         MLInternsList,
         WebInternsList,
+        setToastifyObj,
     } = useContext(ListContext);
 
     useEffect(() => {
@@ -84,6 +84,11 @@ ${addMembersToList(WebInternsList)}
         navigator.clipboard.writeText(textareaValue).then(() => {
             console.log(`Copied to clipboard`);
             setCopyBtnText("Copied");
+
+            setToastifyObj({
+                title: "Copied Output to Clipboard",
+                mode: "info",
+            });
 
             setTimeout(() => {
                 setCopyBtnText("Copy");

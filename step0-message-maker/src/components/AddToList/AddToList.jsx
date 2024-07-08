@@ -11,6 +11,7 @@ const AddToList = () => {
         setMLInternsList,
         setWebInternsList,
         isAdminUsingApp,
+        setToastifyObj,
     } = useContext(ListContext);
 
     const [formData, setFormData] = useState({
@@ -89,8 +90,18 @@ const AddToList = () => {
                 });
 
                 console.log("Online Mode: Add Member");
+
+                setToastifyObj({
+                    title: `Online Mode: Add "${formData.nameEN}"`,
+                    mode: "warning",
+                });
             } else {
                 console.log("Local Mode: Add Member");
+
+                setToastifyObj({
+                    title: `Local Mode: Add "${formData.nameEN}"`,
+                    mode: "info",
+                });
             }
 
             setFormData({
