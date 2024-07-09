@@ -93,6 +93,10 @@
         padding-top: 20px;
         line-height: 20px;
 
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
         &:before {
             content: "";
             display: block;

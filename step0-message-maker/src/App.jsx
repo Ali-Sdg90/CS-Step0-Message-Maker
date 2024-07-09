@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Style from "./assets/styles/App.module.scss";
 import Header from "./components/Header/Header";
 import AddToList from "./components/AddToList/AddToList";
@@ -12,8 +12,8 @@ import Tostify from "./helpers/Tostify/Tostify";
 const App = () => {
     return (
         <div className={Style.container}>
-            <Tostify />
             <CustomScaleCalc>
+                <Tostify />
                 <Header />
                 <div className={Style.mainContents}>
                     <LoginSection />

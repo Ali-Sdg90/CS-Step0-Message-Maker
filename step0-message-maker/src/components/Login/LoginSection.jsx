@@ -46,7 +46,7 @@ const LoginSection = () => {
             decrypt("U2FsdGVkX1+sCM7CdsZQ7oTO7qCANVrmNlwghoZZDxY=") ===
             decrypt(encrypt())
         ) {
-            console.log("Aloha Admin");
+            console.log("Aloha Admin :)");
             setIsAdminUsingApp(true);
 
             setFormData({

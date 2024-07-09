@@ -21,7 +21,7 @@ const FirebaseConnectionChecker = ({ children }) => {
                     mode: "success",
                 });
             } catch (err) {
-                console.log(err.message);
+                console.log("ERROR >> ", err.message);
 
                 if (
                     err.message ===
@@ -40,8 +40,8 @@ const FirebaseConnectionChecker = ({ children }) => {
             }
         };
 
-        return () => checkConnection();
-    }, []);
+        checkConnection();
+    }, [setToastifyObj]);
 
     return <ErrorBoundary>{children}</ErrorBoundary>;
 };

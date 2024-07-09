@@ -29,7 +29,8 @@ const AppContext = ({ children }) => {
             if (nameA > nameB) return 1;
             return 0;
         });
-        console.log(list);
+
+        // console.log(list); //Temp
         return list;
     };
 
@@ -94,9 +95,7 @@ const AppContext = ({ children }) => {
 
             setWebInternsList(webInternsData);
         } catch (error) {
-            // console.clear();
-            // console.error("Error fetching data: ", error);
-            setErrorMsg(":::::", error.message);
+            setErrorMsg(error.message);
         }
     };
 
@@ -121,8 +120,6 @@ const AppContext = ({ children }) => {
                 setIsAppReadyToUse(false);
             }
         }
-
-        // console.log("technicalMentorsList", technicalMentorsList);
     }, [
         technicalMentorsList,
         CSharpInternsList,

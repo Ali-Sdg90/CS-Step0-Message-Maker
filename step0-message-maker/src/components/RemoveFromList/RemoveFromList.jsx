@@ -45,8 +45,6 @@ const RemoveFromList = () => {
             });
         }
 
-        console.log(Course);
-
         switch (Course) {
             case "Technical Mentor":
                 setTechnicalMentorsList((prevState) =>

@@ -195,7 +195,6 @@ const AddToList = () => {
                             placeholder="Full Name in Farsi"
                             value={formData.nameFA}
                             onChange={handleChange}
-                            // dir="rtl"
                             required
                             autoComplete="off"
                         />
@@ -212,7 +211,6 @@ const AddToList = () => {
                             required
                             autoComplete="off"
                         />
-                        {/* <span className={Style.idPrefix}>@</span> */}
                     </div>
                     <div className={Style.input}>
                         <label htmlFor="course">Position:</label>

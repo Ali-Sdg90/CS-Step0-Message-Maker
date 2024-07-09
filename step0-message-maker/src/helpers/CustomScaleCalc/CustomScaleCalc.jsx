@@ -23,8 +23,6 @@ const CustomScaleCalc = ({ children }) => {
 
     useEffect(() => {
         if (pageHeight > pageWidth - 300) {
-            const aspectRatio = pageHeight / pageWidth;
-
             if (pageHeight > pageWidth - 300) {
                 if (pageHeight / pageWidth > 1177 / 689) {
                     setScaleValue((1 * pageWidth) / 695);
