@@ -21,6 +21,8 @@ const AppContext = ({ children }) => {
         mode: "info",
     });
 
+    const isTimeForCreateBackup = false;
+
     const sortNames = (list) => {
         list.sort((a, b) => {
             let nameA = a.id.toLowerCase();
@@ -62,6 +64,8 @@ const AppContext = ({ children }) => {
             );
 
             setTechnicalMentorsList(technicalMentorsData);
+            isTimeForCreateBackup &&
+                console.log("technicalMentorsData >>", technicalMentorsData);
 
             // -------------
 
@@ -74,6 +78,8 @@ const AppContext = ({ children }) => {
             }));
 
             setCSharpInternsList(csharpInternsData);
+            isTimeForCreateBackup &&
+                console.log("csharpInternsData >>", csharpInternsData);
 
             // -------------
 
@@ -84,6 +90,8 @@ const AppContext = ({ children }) => {
             }));
 
             setMLInternsList(mlInternsData);
+            isTimeForCreateBackup &&
+                console.log("mlInternsData >>", mlInternsData);
 
             // -------------
 
@@ -94,6 +102,8 @@ const AppContext = ({ children }) => {
             }));
 
             setWebInternsList(webInternsData);
+            isTimeForCreateBackup &&
+                console.log("webInternsData >>", webInternsData);
         } catch (error) {
             setErrorMsg(error.message);
         }
