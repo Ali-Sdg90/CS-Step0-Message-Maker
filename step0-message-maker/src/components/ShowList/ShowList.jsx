@@ -3,6 +3,8 @@ import Style from "./ShowList.module.scss";
 import { demoList } from "./demoList";
 import { ListContext } from "../../store/AppContext.jsx";
 
+import moment from "jalali-moment";
+
 const numbersFA = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 
 const ShowList = () => {
@@ -44,6 +46,17 @@ const ShowList = () => {
         setToastifyObj,
     } = useContext(ListContext);
 
+    const createCreationTime = () => {
+        const currentDate = new Date();
+
+        const shamsiDate = moment(currentDate)
+            .locale("fa")
+            .format("jYYYY/jMM/jDD HH:mm:ss");
+        console.log(shamsiDate);
+
+        return shamsiDate;
+    };
+
     useEffect(() => {
         setTextareaValue(`سلام وقت بخیر
         
@@ -69,7 +82,7 @@ ${addMembersToList(MLInternsList)}
 ${addMembersToList(WebInternsList)}
 
 این پیام با تغییر افراد برنامه آپدیت خواهد شد.
-تاریخ آخرین آپدیت: ${new Date().toLocaleString()}
+تاریخ آخرین آپدیت: ${createCreationTime()}
 
 برنامه ادیت پیام:
 https://ali-sdg90.github.io/CS-Step0-Message-Maker/
